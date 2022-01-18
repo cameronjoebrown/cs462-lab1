@@ -8,6 +8,7 @@ ruleset twilio {
         configure using
             account_sid = ""
             auth_token = ""
+            service_sid = ""
         provides get_messages, send_sms
         shares get_messages
     }
@@ -22,7 +23,7 @@ ruleset twilio {
 
         send_sms = defaction(to, sender, message) {
             authMap = {"username":account_sid, "password":auth_token}
-            form = { "Body":message, "From":sender, "To":to }
+            form = { "Body":message, "From":sender, "To":to, "MessagingServiceSid":service_sid }
             http:post(base_url, auth=authMap, form=form) setting(response)
             return response
         }
