@@ -35,13 +35,9 @@ ruleset test_twilio {
             to = event:attrs{"to"}
             sender = event:attrs{"sender"}
             page_size = event:attrs{"page_size"}
+            messages = twilio:get_messages(to, sender, page_size)
         }
 
-       twilio:get_messages(to, sender, page_size) setting(response)
-
-        fired {
-            ent:lastResponse := response
-            ent:lastTimestamp := time:now()
-        }
+        send_directive("messages", {"messages": messages})
     }
 }
