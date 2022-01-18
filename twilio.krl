@@ -11,10 +11,10 @@ ruleset twilio {
         
     }
     global {
-        base_url = "/2010-04-01/Accounts/#{account_sid}/Messages"
+        base_url = "https://api.twilio.com/2010-04-01/Accounts/#{account_sid}/Messages"
 
         get_messages = function() {
-            queryString = {"api_key":apiKey}
+            queryString = {"accountSid":account_sid, "authToken":auth_token}
             response = http:get(<<#{base_url}.json>>, qs=queryString)
             response{"content"}.decode()
         }
