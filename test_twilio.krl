@@ -7,7 +7,9 @@ ruleset test_twilio {
         
     }
     global {
-
+        lastResponse = function() {
+            {}.put(ent:lastTimestamp, ent:lastResponse)
+        }
     }
 
     rule send_sms {
@@ -17,6 +19,11 @@ ruleset test_twilio {
             sender = event:attr{"sender"}
             message = event:attr{"message"}
         }
-        twilio:send_sms(to, sender, message)
+        twilio:send_sms(to, sender, message) setting(response)
+        
+        fired {
+            ent:lastResponse := response
+            ent:lastTimestamp := time:now()
+        }
     }
 }
