@@ -13,7 +13,7 @@ ruleset twilio {
         shares get_messages
     }
     global {
-        base_url = "https://api.twilio.com/2010-04-01/Accounts/#{account_sid}/Messages"
+        base_url = <<https://api.twilio.com/2010-04-01/Accounts/#{account_sid}/Messages>>
 
         get_messages = function() {
             authMap = {"username":account_sid, "password":auth_token}
