@@ -16,7 +16,7 @@ ruleset twilio {
 
         get_messages = function() {
             authMap = {"username":account_sid, "password":auth_token}
-            response = http:get(<<#{base_url}.json>>, auth=authMap)
+            response = http:get(<<#{base_url}.json>>, auth=authMap).klog()
             response{"content"}.decode()
         }
 
@@ -24,7 +24,7 @@ ruleset twilio {
             authMap = {"username":account_sid, "password":auth_token}
             form = { "Body":message, "From":sender, "To":to }
             http:post(base_url, auth=authMap, form=form) setting(response)
-            return response
+            return response.klog()
         }
     }
 }
