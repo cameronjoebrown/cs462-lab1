@@ -9,6 +9,7 @@ ruleset twilio {
             account_sid = ""
             auth_token = ""
         provides get_messages, send_sms
+        shares get_messages
     }
     global {
         base_url = "https://api.twilio.com/2010-04-01/Accounts/#{account_sid}/Messages"
