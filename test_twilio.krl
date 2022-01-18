@@ -27,4 +27,21 @@ ruleset test_twilio {
             ent:lastTimestamp := time:now()
         }
     }
+
+    rule get_messages {
+        select when twilio get_messages
+
+        pre {
+            to = event:attrs{"to"}
+            sender = event:attrs{"sender"}
+            page_size = event:attrs{"page_size"}
+        }
+
+       twilio:get_messages(to, sender, page_size) setting(response)
+
+        fired {
+            ent:lastResponse := response
+            ent:lastTimestamp := time:now()
+        }
+    }
 }
