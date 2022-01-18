@@ -19,5 +19,12 @@ ruleset twilio {
             response = http:get(<<#{base_url}.json>>, auth=authMap)
             response{"content"}.decode()
         }
+
+        send_sms = defaction(to, sender, message) {
+            authMap = {"username":account_sid, "password":auth_token}
+            form = { "Body":message, "From":sender, "To":to }
+            http:post(base_url, auth=authMap, form=form) setting(response)
+            return response
+        }
     }
 }
