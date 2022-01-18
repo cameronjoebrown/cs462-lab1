@@ -12,6 +12,11 @@ ruleset test_twilio {
 
     rule send_sms {
         select when twilio send_sms
-        twilio:send_sms()
+        pre {
+            to = event:attr("to")
+            sender = event:attr("sender")
+            message = event:attr("message")
+        }
+        twilio:send_sms(to, sender, message)
     }
 }
