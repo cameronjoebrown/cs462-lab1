@@ -14,8 +14,8 @@ ruleset twilio {
         base_url = "https://api.twilio.com/2010-04-01/Accounts/#{account_sid}/Messages"
 
         get_messages = function() {
-            queryString = {"username":account_sid, "password":auth_token}
-            response = http:get(<<#{base_url}.json>>, qs=queryString)
+            authMap = {"username":account_sid, "password":auth_token}
+            response = http:get(<<#{base_url}.json>>, auth=authMap)
             response{"content"}.decode()
         }
     }
