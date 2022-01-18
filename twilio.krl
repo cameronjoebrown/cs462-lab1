@@ -8,7 +8,6 @@ ruleset twilio {
         configure using
             account_sid = ""
             auth_token = ""
-        shares get_messages, send_sms
         provides get_messages, send_sms
     }
     global {
