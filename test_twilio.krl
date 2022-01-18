@@ -7,6 +7,11 @@ ruleset test_twilio {
         
     }
     global {
-        
+
+    }
+
+    rule send_sms {
+        select when twilio send_sms
+        twilio:send_sms()
     }
 }
