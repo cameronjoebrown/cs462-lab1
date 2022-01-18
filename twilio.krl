@@ -24,7 +24,7 @@ ruleset twilio {
             authMap = {"username":account_sid, "password":auth_token}
             form = { "Body":message, "From":sender, "To":to }
             http:post(base_url, auth=authMap, form=form) setting(response)
-            return response.klog()
+            return response
         }
     }
 }

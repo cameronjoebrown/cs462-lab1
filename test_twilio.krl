@@ -4,7 +4,7 @@ ruleset test_twilio {
             with
                 account_sid = meta:rulesetConfig{"account_sid"}
                 auth_token = meta:rulesetConfig{"auth_token"}
-        
+        shares lastResponse
     }
     global {
         lastResponse = function() {
@@ -20,7 +20,7 @@ ruleset test_twilio {
             message = event:attr{"message"}
         }
         twilio:send_sms(to, sender, message) setting(response)
-        
+
         fired {
             ent:lastResponse := response
             ent:lastTimestamp := time:now()
