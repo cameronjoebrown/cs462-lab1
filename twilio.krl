@@ -17,8 +17,8 @@ ruleset twilio {
 
         get_messages = function(to="+14352162134", sender="+19402907444", page_size="20") {
             authMap = {"username":account_sid, "password":auth_token}
-            queryString = {"PageSize":page_size, "From":sender, "To":to}
-            response = http:get(<<#{base_url}.json>>, auth=authMap, qs=queryString)
+            queryString = { "From":sender, "To":to }
+            response = http:get(<<#{base_url}.json?&PageSize=#{page_size}>>, auth=authMap, qs=queryString)
             response{"content"}.decode()
         }
 
