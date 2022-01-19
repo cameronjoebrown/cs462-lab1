@@ -1,0 +1,9 @@
+1. Why does this assignment ask you to create a function for messages but an action for sending the SMS message? What's the difference? 
+    In general, functions are used for tasks that only read data, not change it. Whereas, actions are used for tasks that do change the state.
+    This means that functions are often used for GET HTTP requests and actions are used for POST and PUT HTTP requests. In our use case in this lab,
+    retrieving messages is only reading data using a GET request so a function is what we used, but since sending an SMS message uses a POST request
+    and changes data, we use an action.
+
+2. Why did we introduce the secrets for the Twilio module by configuring the rule that uses the module, rather than configuring the module directly? 
+    We don't want to configure the secrets in the module directly because that is an awful security practice. We don't want to include the secrets
+    in any file that will be under source control. That's just an industry best practice.
